@@ -1,0 +1,20 @@
+{
+  "name": "ProducerNode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/NewOrderProducer.js",
+  "scripts": {
+    "start": "nodemon src/NewOrderProducer.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "kafkajs": "^1.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
