@@ -1,17 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Confluent.Kafka;
 
-namespace ConsumerNetCore
+namespace Log.Service
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var config = new ConsumerConfig
+          var config = new ConsumerConfig
             {
                 BootstrapServers = "localhost:9092",
-                GroupId = "foo",
+                GroupId = "ECOMMERCE_LOG_SERVICE",
 
                 AutoOffsetReset = AutoOffsetReset.Earliest
             };
@@ -25,18 +26,19 @@ namespace ConsumerNetCore
 
             using (var consumer = new ConsumerBuilder<Ignore, string>(config).Build())
             {
-                consumer.Subscribe("ECOMMERCE_NEW_ORDER");
+                consumer.Subscribe("^ECOMMERCE*");
 
-                 while (true)
+                while (true)
                 {
                     var consumeResult = consumer.Consume(cts.Token);
 
-                    Console.WriteLine(consumeResult.Message.Value);
+                    Console.WriteLine("LOG");
+                    Console.WriteLine(consumeResult.Topic);
                     // handle consumed message.
 
                 }
 
-                consumer.Close();
+            consumer.Close();
             }
         }
     }
